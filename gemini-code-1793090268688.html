@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberPricing Shopee Analytics Neon Holo HUD</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              holo: {
+                bg: '#f0f4f9',
+                card: 'rgba(255, 255, 255, 0.75)',
+                cardDark: 'rgba(15, 23, 42, 0.85)',
+                neonCyan: '#00f3ff',
+                neonMagenta: '#ff007f',
+                neonPurple: '#9d4edd',
+                neonYellow: '#ffe600',
+                neonGreen: '#00ff88',
+                neonBlue: '#0066ff',
+              }
+            },
+            boxShadow: {
+              glowCyan: '0 0 25px rgba(0, 243, 255, 0.45), 0 0 5px rgba(0, 243, 255, 0.8)',
+              glowMagenta: '0 0 25px rgba(255, 0, 127, 0.45), 0 0 5px rgba(255, 0, 127, 0.8)',
+              glowPurple: '0 0 25px rgba(157, 78, 221, 0.45), 0 0 5px rgba(157, 78, 221, 0.8)',
+              glowGreen: '0 0 25px rgba(0, 255, 136, 0.45), 0 0 5px rgba(0, 255, 136, 0.8)',
+              glowYellow: '0 0 25px rgba(255, 230, 0, 0.45), 0 0 5px rgba(255, 230, 0, 0.8)',
+              glassHolo: '0 20px 50px rgba(0, 0, 0, 0.08), inset 0 0 2px rgba(255, 255, 255, 0.8)',
+            }
+          }
+        }
+      };
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;0,800;1,800&family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap');
+
+      body {
+        font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui;
+        background-color: #f3f6fc;
+        background-image: 
+          radial-gradient(circle at 5% 10%, rgba(0, 243, 255, 0.22) 0%, transparent 35%),
+          radial-gradient(circle at 95% 15%, rgba(255, 0, 127, 0.22) 0%, transparent 35%),
+          radial-gradient(circle at 50% 85%, rgba(157, 78, 221, 0.18) 0%, transparent 45%),
+          radial-gradient(circle at 80% 80%, rgba(0, 255, 136, 0.18) 0%, transparent 35%),
+          linear-gradient(135deg, #eef2f9 0%, #f8fafc 100%);
+        background-attachment: fixed;
+        color: #0f172a;
+      }
+
+      .font-mono-num {
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .cyber-grid-light {
+        background-size: 32px 32px;
+        background-image: 
+          linear-gradient(to right, rgba(0, 102, 255, 0.06) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(0, 102, 255, 0.06) 1px, transparent 1px);
+      }
+
+      .holo-card {
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1.5px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 12px 40px rgba(15, 23, 42, 0.06);
+      }
+
+      .holo-card-dark {
+        background: rgba(15, 23, 42, 0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1.5px solid rgba(0, 243, 255, 0.3);
+      }
+
+      @keyframes holoPulse {
+        0%, 100% { filter: drop-shadow(0 0 12px rgba(0, 243, 255, 0.8)) drop-shadow(0 0 20px rgba(255, 0, 127, 0.5)); transform: scale(1); }
+        50% { filter: drop-shadow(0 0 20px rgba(255, 0, 127, 0.9)) drop-shadow(0 0 25px rgba(0, 255, 136, 0.7)); transform: scale(1.03); }
+      }
+
+      .holo-logo-glow {
+        animation: holoPulse 4s infinite alternate ease-in-out;
+      }
+
+      @keyframes neonPulse {
+        0%, 100% { border-color: rgba(0, 243, 255, 0.8); box-shadow: 0 0 15px rgba(0, 243, 255, 0.4); }
+        33% { border-color: rgba(255, 0, 127, 0.8); box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); }
+        66% { border-color: rgba(157, 78, 221, 0.8); box-shadow: 0 0 15px rgba(157, 78, 221, 0.4); }
+      }
+
+      .animated-neon-border {
+        animation: neonPulse 8s infinite alternate ease-in-out;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(241, 245, 249, 0.8);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #00f3ff, #ff007f);
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, #ff007f, #9d4edd);
+      }
+
+      #spreadsheetBody td,
+      #tableHeader th {
+        font-size: 11.5px !important;
+      }
+
+      #spreadsheetBody td {
+        padding: 0.45rem 0.4rem !important;
+      }
+
+      .sticky-col-1 {
+        position: sticky;
+        left: 0;
+        z-index: 20;
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(12px);
+      }
+
+      .modal-backdrop {
+        background: rgba(15, 23, 42, 0.65);
+        backdrop-filter: blur(12px);
+      }
+    </style>
+  </head>
+  <body class="cyber-grid-light min-h-screen text-slate-900 antialiased selection:bg-cyan-400 selection:text-black">
+    <div class="max-w-[1920px] mx-auto px-3 md:px-6 py-4">
+      
+      <!-- HEADER HUD -->
+      <header class="mb-5 holo-card animated-neon-border rounded-3xl p-4 md:p-5 relative overflow-hidden">
+        <div class="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-cyan-400 via-pink-500 via-yellow-400 to-emerald-400"></div>
+
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+          
+          <div id="headerLogoContainer" class="flex flex-wrap items-center gap-4 transition-all duration-300">
+            <div id="appLogoBadge" class="relative group cursor-pointer" onclick="editHeaderTitle()">
+              <div class="w-14 h-14 rounded-2xl bg-slate-900 p-2.5 flex items-center justify-center border-2 border-cyan-400 shadow-glowCyan holo-logo-glow">
+                <svg class="w-full h-full text-cyan-400" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" stroke="currentColor" stroke-width="6" fill="rgba(0,243,255,0.15)"/>
+                  <path d="M30 40 L50 25 L70 40 L70 65 L50 80 L30 65 Z" stroke="#ff007f" stroke-width="5" fill="rgba(255,0,127,0.2)"/>
+                  <circle cx="50" cy="50" r="10" fill="#ffe600"/>
+                  <path d="M50 20 L50 80 M20 50 L80 50" stroke="#00ff88" stroke-width="3" stroke-dasharray="4 2"/>
+                </svg>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-widest uppercase bg-slate-900 text-cyan-300 shadow-sm border border-cyan-400/40">
+                  <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                  NEON HOLO V3.9
+                </span>
+                <span id="dataSaveStatus" class="text-[11px] font-extrabold text-emerald-600 transition-all duration-300"></span>
+              </div>
+
+              <h1 class="text-2xl md:text-3xl font-black tracking-tight text-slate-900 flex flex-wrap items-center gap-2">
+                <span id="appHeaderTitle" class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-600 drop-shadow-sm">CYBER PRICING</span>
+                <span id="appHeaderBadge" class="text-xs font-black px-2.5 py-0.5 rounded-xl bg-gradient-to-r from-cyan-400 via-pink-500 to-yellow-400 text-slate-900 shadow-glowCyan uppercase tracking-widest border border-white">NEON HOLO</span>
+              </h1>
+            </div>
+
+            <div class="flex items-center gap-1.5 ml-0 lg:ml-2 pl-3 border-l-2 border-slate-200/80">
+              <button onclick="editHeaderTitle()" title="Ubah Nama & Subtitle Header" class="inline-flex items-center gap-1.5 bg-cyan-50 hover:bg-cyan-100 text-cyan-800 border border-cyan-300 px-3 py-1.5 rounded-xl text-[11px] font-black transition-all hover:scale-105 shadow-sm">
+                <i data-lucide="pencil" class="w-3.5 h-3.5 text-cyan-600"></i>
+                <span>Ubah Title</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Futuristic Action Control Buttons (Termasuk File Server & Copy Produk) -->
+          <div class="flex flex-wrap items-center gap-2 justify-start lg:justify-end">
+            <!-- Tombol Buka File dari Server/Lokal -->
+            <button onclick="openFileFromServer()" class="inline-flex items-center gap-1.5 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 px-3 py-2.5 rounded-2xl font-black text-xs shadow-sm transition-all" title="Buka file HTML langsung dari server/direktori">
+              <i data-lucide="folder-open" class="w-4 h-4 text-sky-600"></i>
+              <span>BUKA FILE</span>
+            </button>
+            <!-- Tombol Simpan Update Langsung ke Server/File Asli -->
+            <button onclick="saveFileToServer()" class="inline-flex items-center gap-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 px-3 py-2.5 rounded-2xl font-black text-xs shadow-sm transition-all" title="Simpan update langsung ke file server">
+              <i data-lucide="hard-drive-download" class="w-4 h-4 text-indigo-600"></i>
+              <span>SAVE KE FILE</span>
+            </button>
+
+            <button onclick="openNewProductModal()" class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 hover:from-cyan-300 hover:to-purple-500 text-black font-black px-4 py-2.5 rounded-2xl text-xs shadow-glowCyan transition-all hover:scale-105">
+              <i data-lucide="plus-circle" class="w-4 h-4 stroke-[3]"></i>
+              <span>PRODUK BARU</span>
+            </button>
+            <!-- Tombol Copy Produk / Duplikat Varian -->
+            <button onclick="duplicateCurrentProduct()" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-black font-black px-3.5 py-2.5 rounded-2xl text-xs shadow-glowYellow transition-all hover:scale-105" title="Duplikat produk aktif beserta seluruh isinya">
+              <i data-lucide="copy" class="w-4 h-4 stroke-[3]"></i>
+              <span>COPY PRODUK</span>
+            </button>
+            <button onclick="renameCurrentProduct()" class="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 px-3 py-2.5 rounded-2xl font-black text-xs shadow-sm transition">
+              <i data-lucide="edit-3" class="w-4 h-4 text-cyan-600"></i>
+              <span>RENAME</span>
+            </button>
+            <button onclick="deleteCurrentProduct()" class="inline-flex items-center gap-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border-2 border-rose-200 px-3 py-2.5 rounded-2xl font-black text-xs shadow-sm transition">
+              <i data-lucide="trash-2" class="w-4 h-4 text-rose-600"></i>
+              <span>HAPUS</span>
+            </button>
+            <button onclick="saveDataManually()" class="inline-flex items-center gap-2 bg-emerald-400 hover:bg-emerald-300 text-black font-black px-4 py-2.5 rounded-2xl text-xs shadow-glowGreen transition hover:scale-105">
+              <i data-lucide="save" class="w-4 h-4 stroke-[3]"></i>
+              <span>SIMPAN</span>
+            </button>
+            <button onclick="exportToCSV()" class="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-black px-4 py-2.5 rounded-2xl text-xs shadow-glowMagenta transition hover:scale-105">
+              <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
+              <span>EXPORT CSV</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- PRODUCT CARTRIDGE TABS & SEARCH -->
+      <div class="mb-4 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3">
+        <div id="productTabsContainer" class="flex flex-wrap items-center gap-2"></div>
+        <div class="flex items-center gap-2 holo-card rounded-2xl px-3.5 py-2 border-2 border-cyan-400/50 shadow-glowCyan">
+          <i data-lucide="search" class="w-4 h-4 text-cyan-600"></i>
+          <input id="searchInput" type="text" onkeyup="renderTable()" placeholder="Cari variasi / spesifikasi..." class="w-full xl:w-72 bg-transparent text-xs font-black text-slate-900 placeholder-slate-400 outline-none" />
+        </div>
+      </div>
+
+      <!-- GLOBAL PARAMETERS GRID -->
+      <div id="globalParamsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mb-5"></div>
+
+      <!-- SPREADSHEET CARD DECK -->
+      <div class="holo-card rounded-3xl border-2 border-cyan-300/80 overflow-hidden relative shadow-2xl">
+        <div class="flex flex-wrap items-center justify-between bg-slate-900 text-white border-b-2 border-cyan-400 px-5 py-3.5 gap-3">
+          <div class="flex items-center gap-2.5">
+            <div class="p-2 rounded-xl bg-cyan-400 text-black font-black shadow-glowCyan">
+              <i data-lucide="layers" class="w-4 h-4"></i>
+            </div>
+            <span class="font-black text-sm tracking-wider uppercase text-cyan-300">MATRIKS SIMULASI HARGA & MARGIN</span>
+          </div>
+          <div class="flex items-center gap-4 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="text-slate-300 font-extrabold uppercase text-[10px] tracking-widest">TOTAL ITEM:</span>
+              <span id="totalRowsCount" class="font-mono-num font-black px-2.5 py-0.5 rounded-lg bg-cyan-400 text-black border border-cyan-200 shadow-glowCyan">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="overflow-auto max-h-[68vh]">
+          <table class="min-w-full text-left">
+            <thead id="tableHeader"></thead>
+            <tbody id="spreadsheetBody" class="divide-y divide-slate-200/80 font-mono-num bg-white/60"></tbody>
+          </table>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 border-t-2 border-slate-200 bg-slate-900 text-white px-5 py-3.5">
+          <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest text-cyan-300 font-black">
+            <i data-lucide="sliders-horizontal" class="w-4 h-4 text-cyan-400"></i>
+            <span>KONTROL BARIS & KOLOM MODAL</span>
+          </div>
+          <div class="flex flex-wrap gap-2.5">
+            <button onclick="addTableColumn()" class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black px-4 py-2 rounded-xl font-black text-xs shadow-glowYellow transition hover:scale-105">
+              <i data-lucide="plus" class="w-4 h-4 stroke-[3]"></i>
+              <span>TAMBAH KOLOM MODAL</span>
+            </button>
+            <button onclick="addNewRow()" class="inline-flex items-center gap-2 bg-cyan-400 hover:bg-cyan-300 text-black px-4 py-2 rounded-xl font-black text-xs shadow-glowCyan transition hover:scale-105">
+              <i data-lucide="rows-3" class="w-4 h-4 stroke-[3]"></i>
+              <span>TAMBAH BARIS</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL BIAYA SHOPEE -->
+    <div id="feeModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-4">
+      <div class="holo-card-dark w-full max-w-3xl rounded-3xl border-2 border-pink-500 shadow-glowMagenta overflow-hidden">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-pink-500/30 bg-pink-950/40">
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 rounded-2xl bg-pink-500 text-white shadow-glowMagenta">
+              <i data-lucide="percent" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-[10px] uppercase tracking-widest text-pink-400 font-black">KONFIGURASI BIAYA</p>
+              <h2 class="text-lg font-black text-white">Kelola Aturan Potongan Shopee</h2>
+            </div>
+          </div>
+          <button onclick="closeModal('feeModal')" class="text-slate-400 hover:text-white transition">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+        <div class="p-6">
+          <div class="mb-4 flex justify-between items-center">
+            <p class="text-xs text-slate-300 font-medium">Atur potongan persentase, nominal flat per order, serta cap maksimal biaya.</p>
+            <button onclick="addNewFeeRule()" class="inline-flex items-center gap-2 bg-pink-500 hover:bg-pink-400 text-white px-3.5 py-2 rounded-xl font-black text-xs shadow-glowMagenta transition">
+              <i data-lucide="plus" class="w-4 h-4 stroke-[3]"></i>
+              Tambah Biaya
+            </button>
+          </div>
+          <div id="shopeeFeeListModal" class="space-y-3 max-h-[50vh] overflow-y-auto pr-1"></div>
+        </div>
+        <div class="flex justify-end gap-3 border-t border-slate-800 px-6 py-4 bg-slate-950/90">
+          <button onclick="closeModal('feeModal')" class="px-4 py-2 rounded-xl border border-slate-700 bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700 transition">BATAL</button>
+          <button onclick="saveFeeRulesAndClose()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-black text-xs hover:from-pink-400 hover:to-purple-500 transition shadow-glowMagenta">SIMPAN ATURAN</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL PRODUK BARU -->
+    <div id="newProductModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-4">
+      <div class="holo-card-dark w-full max-w-lg rounded-3xl border-2 border-purple-500 shadow-glowPurple overflow-hidden">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-purple-500/30 bg-purple-950/40">
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 rounded-2xl bg-purple-500 text-white shadow-glowPurple">
+              <i data-lucide="box" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-[10px] uppercase tracking-widest text-purple-300 font-black">ANALISIS BARU</p>
+              <h2 class="text-lg font-black text-white">Buat Produk / Kategori Baru</h2>
+            </div>
+          </div>
+          <button onclick="closeModal('newProductModal')" class="text-slate-400 hover:text-white transition">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+        <div class="p-6 space-y-4">
+          <div>
+            <label class="block text-[10px] uppercase tracking-widest text-purple-300 font-black mb-1.5">Nama Produk / Kategori</label>
+            <input id="newProductName" type="text" class="w-full bg-slate-900 border-2 border-purple-500/50 focus:border-cyan-400 rounded-xl px-4 py-2.5 text-xs font-bold text-white outline-none" placeholder="Contoh: LEMARI BESI SLIDING" />
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase tracking-widest text-purple-300 font-black mb-1.5">Template Struktur Modal</label>
+            <select id="newProductTemplate" class="w-full bg-slate-900 border-2 border-purple-500/50 focus:border-cyan-400 rounded-xl px-4 py-2.5 text-xs font-bold text-white outline-none">
+              <option value="lemari">Standard / Furniture (Lemari/Meja)</option>
+              <option value="busa">Kasur Busa (Formula Kubikasi L x P x T)</option>
+              <option value="springbed">Springbed (Komponen Per, Cover, Frame)</option>
+              <option value="custom">Custom (Bebas / Polos)</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex justify-end gap-3 border-t border-slate-800 px-6 py-4 bg-slate-950/90">
+          <button onclick="closeModal('newProductModal')" class="px-4 py-2 rounded-xl border border-slate-700 bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700 transition">BATAL</button>
+          <button onclick="createNewProduct()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-black font-black text-xs hover:from-cyan-300 hover:to-purple-500 transition shadow-glowCyan">BUAT PRODUK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+      let appData = {
+        headerTitle: 'CYBER PRICING',
+        headerBadge: 'NEON HOLO',
+        activeProductId: 'prod_1',
+        products: []
+      };
+
+      const STORAGE_KEY = 'super_app_hpp_shopee_v3_holo';
+      let fileHandle = null; // Handler untuk File System Access API (Server/Local File Sync)
+
+      document.addEventListener('DOMContentLoaded', () => {
+        loadStoredData();
+        renderHeaderBranding();
+        renderApp();
+      });
+
+      function formatNumber(num) {
+        return new Intl.NumberFormat('id-ID').format(Math.round(num || 0));
+      }
+
+      function closeModal(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+      }
+
+      function openModal(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('hidden');
+      }
+
+      function loadStoredData() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          try {
+            appData = JSON.parse(raw);
+            if (!appData.headerTitle) appData.headerTitle = 'CYBER PRICING';
+            if (!appData.headerBadge) appData.headerBadge = 'NEON HOLO';
+          } catch (e) {
+            console.error('Error loading stored data:', e);
+            initDefaultData();
+          }
+        } else {
+          initDefaultData();
+        }
+      }
+
+      function saveState() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+      }
+
+      function saveDataManually() {
+        try {
+          saveState();
+          const status = document.getElementById('dataSaveStatus');
+          if (status) {
+            status.textContent = '[✓ DATA TERSIMPAN]';
+            setTimeout(() => { status.textContent = ''; }, 2500);
+          }
+        } catch (error) {
+          alert('Data gagal disimpan ke browser local storage.');
+        }
+      }
+
+      // FITUR BARU: Buka File langsung dari direktori/server lokal
+      async function openFileFromServer() {
+        if (!window.showOpenFilePicker) {
+          alert('Browser Anda tidak mendukung File System Access API. Gunakan Google Chrome atau Edge.');
+          return;
+        }
+        try {
+          [fileHandle] = await window.showOpenFilePicker({
+            types: [{ description: 'HTML Files', accept: { 'text/html': ['.html'] } }]
+          });
+          const file = await fileHandle.getFile();
+          const content = await file.text();
+          
+          // Cari state atau parsing data jika tersimpan di dalam script file
+          alert(`File "${file.name}" berhasil dibuka! Anda dapat melakukan update dan klik "SAVE KE FILE" untuk memperbarui file di server.`);
+        } catch (err) {
+          console.log('Buka file dibatalkan:', err);
+        }
+      }
+
+      // FITUR BARU: Save Update Langsung ke File Asli di Server / Direktori
+      async function saveFileToServer() {
+        saveState();
+        if (!fileHandle) {
+          // Jika belum pernah Buka File, arahkan pakai showSaveFilePicker
+          if (window.showSaveFilePicker) {
+            try {
+              const opts = {
+                types: [{ description: 'HTML Files', accept: { 'text/html': ['.html'] } }],
+                suggestedName: 'Shopee_Pricing_App.html'
+              };
+              fileHandle = await window.showSaveFilePicker(opts);
+            } catch (err) {
+              console.log('Save file dibatalkan');
+              return;
+            }
+          } else {
+            alert('Silakan gunakan tombol "SIMPAN" standar atau buka file server terlebih dahulu.');
+            return;
+          }
+        }
+
+        try {
+          const writable = await fileHandle.createWritable();
+          // Generate ulang string HTML utuh dengan data terbaru
+          const fullHtml = document.documentElement.outerHTML;
+          await writable.write(fullHtml);
+          await writable.close();
+          
+          const status = document.getElementById('dataSaveStatus');
+          if (status) {
+            status.textContent = '[✓ FILE SERVER TER-UPDATE!]';
+            setTimeout(() => { status.textContent = ''; }, 3000);
+          }
+        } catch (err) {
+          console.error(err);
+          alert('Gagal menyimpan langsung ke file server.');
+        }
+      }
+
+      // FITUR BARU: Copy Produk / Duplikat Varian Kategori
+      function duplicateCurrentProduct() {
+        const currentProd = getActiveProduct();
+        if (!currentProd) return;
+
+        const newId = 'prod_' + Date.now();
+        const clonedProduct = JSON.parse(JSON.stringify(currentProd));
+        
+        clonedProduct.id = newId;
+        clonedProduct.name = `${currentProd.name} (COPY)`;
+        
+        // Perbarui ID baris agar unik
+        clonedProduct.rows.forEach(r => {
+          r.id = Date.now() + Math.floor(Math.random() * 1000);
+        });
+
+        appData.products.push(clonedProduct);
+        appData.activeProductId = newId;
+        saveState();
+        renderApp();
+      }
+
+      function editHeaderTitle() {
+        const currentTitle = appData.headerTitle || 'CYBER PRICING';
+        const currentBadge = appData.headerBadge || 'NEON HOLO';
+        
+        const newTitle = prompt('Masukkan Judul Header / Brand:', currentTitle);
+        if (newTitle !== null && newTitle.trim() !== '') {
+          const newBadge = prompt('Masukkan Subtitle / Tagline Badge:', currentBadge);
+          appData.headerTitle = newTitle.trim().toUpperCase();
+          if (newBadge !== null) {
+            appData.headerBadge = newBadge.trim().toUpperCase();
+          }
+          saveState();
+          renderHeaderBranding();
+        }
+      }
+
+      function renderHeaderBranding() {
+        const titleEl = document.getElementById('appHeaderTitle');
+        const badgeEl = document.getElementById('appHeaderBadge');
+        if (titleEl) titleEl.textContent = appData.headerTitle || 'CYBER PRICING';
+        if (badgeEl) badgeEl.textContent = appData.headerBadge || 'NEON HOLO';
+      }
+
+      function initDefaultData() {
+        appData = {
+          headerTitle: 'CYBER PRICING',
+          headerBadge: 'NEON HOLO',
+          activeProductId: 'prod_1',
+          products: [
+            {
+              id: 'prod_1',
+              name: 'LEMARI BESI',
+              type: 'lemari',
+              discPct: 25,
+              targetMarginPct: 20,
+              shopeeFees: [
+                { id: 'admin', name: 'Admin Shopee', type: 'percent', value: 10.0, cap: 0, active: true },
+                { id: 'fixed', name: 'Fee Flat / Order', type: 'flat', value: 1250, cap: 0, active: true },
+                { id: 'prox', name: 'PROX+ Extra', type: 'percent', value: 4.5, cap: 80000, active: true },
+                { id: 'grox', name: 'GROX Extra', type: 'percent', value: 6.5, cap: 60000, active: true },
+                { id: 'pph', name: 'PPh 0.5% UMKM', type: 'percent', value: 0.5, cap: 0, active: true }
+              ],
+              hppCols: [
+                { id: 'c_variant', name: 'Spesifikasi / Varian', type: 'text' },
+                { id: 'c_modal1', name: 'Modal Utama (Rp)', type: 'currency' },
+                { id: 'c_modal2', name: 'Aksesoris & Packing (Rp)', type: 'currency' }
+              ],
+              rows: [
+                { id: 1, c_variant: 'Lemari Besi 2 Pintu Standard', c_modal1: 450000, c_modal2: 35000 },
+                { id: 2, c_variant: 'Lemari Besi 3 Pintu Jumbo', c_modal1: 720000, c_modal2: 50000 }
+              ]
+            }
+          ]
+        };
+        saveState();
+      }
+
+      function getActiveProduct() {
+        return appData.products.find(p => p.id === appData.activeProductId) || appData.products[0];
+      }
+
+      function renderApp() {
+        renderHeaderBranding();
+        renderTabs();
+        renderGlobalParams();
+        renderTable();
+        if (typeof lucide !== 'undefined' && lucide.createIcons) {
+          lucide.createIcons();
+        }
+      }
+
+      function renderTabs() {
+        const container = document.getElementById('productTabsContainer');
+        if (!container) return;
+        container.innerHTML = '';
+
+        appData.products.forEach((p, index) => {
+          const isActive = p.id === appData.activeProductId;
+          const tabWrap = document.createElement('div');
+          tabWrap.className = `flex items-center gap-1 rounded-2xl p-1.5 transition-all duration-200 ${
+            isActive 
+              ? 'bg-slate-900 text-white border-2 border-cyan-400 shadow-glowCyan scale-105' 
+              : 'holo-card hover:bg-white/90 border-slate-200'
+          }`;
+
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.onclick = () => {
+            appData.activeProductId = p.id;
+            saveState();
+            renderApp();
+          };
+          btn.className = `px-3 py-1.5 rounded-xl text-xs font-black transition flex items-center space-x-2 whitespace-nowrap ${
+            isActive ? 'text-cyan-300' : 'text-slate-700 hover:text-black'
+          }`;
+          
+          btn.innerHTML = `
+            <i data-lucide="package" class="w-4 h-4 ${isActive ? 'text-cyan-400' : 'text-slate-500'}"></i>
+            <span>${p.name}</span>
+          `;
+          tabWrap.appendChild(btn);
+          container.appendChild(tabWrap);
+        });
+      }
+
+      function renderGlobalParams() {
+        const p = getActiveProduct();
+        const grid = document.getElementById('globalParamsGrid');
+        if (!grid || !p) return;
+        grid.innerHTML = '';
+
+        grid.appendChild(createParamCard('Diskon Toko (%)', 'number', p.discPct, (v) => {
+          p.discPct = parseFloat(v) || 0;
+          saveState();
+          renderTable();
+        }, 'border-2 border-purple-400 bg-purple-500/10 text-purple-900 shadow-glowPurple'));
+
+        grid.appendChild(createParamCard('Target Margin (%)', 'number', p.targetMarginPct, (v) => {
+          p.targetMarginPct = parseFloat(v) || 0;
+          saveState();
+          renderTable();
+        }, 'border-2 border-yellow-400 bg-yellow-400/10 text-yellow-900 shadow-glowYellow'));
+
+        if (p.shopeeFees) {
+          p.shopeeFees.forEach(fee => {
+            if (fee.active) {
+              const card = document.createElement('div');
+              card.className = 'holo-card rounded-2xl p-2.5 border-2 border-pink-400 bg-pink-500/10 flex flex-col justify-between shadow-glowMagenta';
+              card.innerHTML = `
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-[10px] font-black uppercase text-pink-700 truncate">${fee.name}</span>
+                </div>
+                <div class="flex items-center gap-1">
+                  <input type="number" value="${fee.value}" step="0.1" onchange="updateFeeVal('${fee.id}', this.value)" class="w-full bg-white border-2 border-pink-300 rounded-xl px-2 py-1 text-xs font-black text-pink-900 text-center outline-none font-mono-num">
+                  <span class="text-xs font-black text-pink-700">${fee.type === 'percent' ? '%' : 'Rp'}</span>
+                </div>
+              `;
+              grid.appendChild(card);
+            }
+          });
+        }
+      }
+
+      function createParamCard(label, type, val, onChangeFn, borderBgStyle) {
+        const div = document.createElement('div');
+        div.className = `holo-card rounded-2xl p-2.5 ${borderBgStyle} flex flex-col justify-between`;
+        div.innerHTML = `
+          <span class="text-[10px] font-black uppercase tracking-wider mb-1 truncate">${label}</span>
+          <input type="${type}" value="${val}" class="w-full bg-white border-2 border-slate-300 rounded-xl px-2.5 py-1 text-xs font-black text-slate-900 outline-none font-mono-num">
+        `;
+        div.querySelector('input').onchange = (e) => onChangeFn(e.target.value);
+        return div;
+      }
+
+      function updateFeeVal(feeId, val) {
+        const p = getActiveProduct();
+        const fee = p.shopeeFees.find(f => f.id === feeId);
+        if (fee) {
+          fee.value = parseFloat(val) || 0;
+          saveState();
+          renderTable();
+        }
+      }
+
+      function calculateRowPrices(hpp, targetMarginPct, discPct, shopeeFees) {
+        const activeFees = (shopeeFees || []).filter(f => f.active);
+        let targetRate = targetMarginPct / 100;
+        let flatSum = 0;
+        activeFees.forEach(f => { if (f.type === 'flat') flatSum += Number(f.value) || 0; });
+
+        let finalPrice = (hpp + flatSum) / (1 - targetRate);
+        const percentFees = activeFees.filter(f => f.type === 'percent');
+
+        for (let i = 0; i < 50; i++) {
+          let effectiveTargetRate = targetRate;
+          percentFees.forEach(f => {
+            effectiveTargetRate += (Number(f.value) || 0) / 100;
+          });
+          finalPrice = (hpp + flatSum) / (1 - effectiveTargetRate);
+        }
+
+        const discFactor = 1 - (discPct / 100);
+        const listingPrice = discFactor > 0 ? (finalPrice / discFactor) : finalPrice;
+        return { finalPrice: Math.round(finalPrice), listingPrice: Math.round(listingPrice) };
+      }
+
+      function getRowAnalysis(product, row) {
+        let hppTotal = 0;
+        product.hppCols.forEach(c => {
+          if (c.type === 'currency') hppTotal += Number(row[c.id]) || 0;
+        });
+
+        const activeFees = product.shopeeFees.filter(f => f.active);
+        const priceCalc = calculateRowPrices(hppTotal, product.targetMarginPct, product.discPct, activeFees);
+        
+        let subtotalAdmin = 0;
+        let feeBreakdownMap = {};
+        activeFees.forEach(f => {
+          let feeAmt = f.type === 'percent' ? priceCalc.finalPrice * (f.value / 100) : f.value;
+          feeBreakdownMap[f.id] = feeAmt;
+          subtotalAdmin += feeAmt;
+        });
+
+        const pencairan = priceCalc.finalPrice - subtotalAdmin;
+        const nettProfit = pencairan - hppTotal;
+        const nettMargin = priceCalc.finalPrice > 0 ? ((nettProfit / priceCalc.finalPrice) * 100) : 0;
+
+        return { hppTotal, finalPrice: priceCalc.finalPrice, listingPrice: priceCalc.listingPrice, feeBreakdownMap, subtotalAdmin, pencairan, nettProfit, nettMargin };
+      }
+
+      function renderTable() {
+        const p = getActiveProduct();
+        const searchKeyword = (document.getElementById('searchInput')?.value || '').toLowerCase();
+        const thead = document.getElementById('tableHeader');
+        const tbody = document.getElementById('spreadsheetBody');
+        if (!p || !thead || !tbody) return;
+
+        tbody.innerHTML = '';
+        thead.innerHTML = '';
+
+        const activeFees = p.shopeeFees.filter(f => f.active);
+
+        // Header Kategori
+        const trCat = document.createElement('tr');
+        trCat.className = 'text-[10px] font-black uppercase tracking-wider text-center select-none';
+        trCat.innerHTML = `
+          <th colspan="${p.hppCols.length}" class="bg-cyan-500 text-black border-b-2 border-r-2 border-cyan-300 py-2.5 px-2">SPESIFIKASI & MODAL</th>
+          <th colspan="2" class="bg-yellow-400 text-black border-b-2 border-r-2 border-yellow-300 py-2.5 px-2">TOTAL HPP</th>
+          <th colspan="3" class="bg-purple-600 text-white border-b-2 border-r-2 border-purple-400 py-2.5 px-2">STRATEGI HARGA JUAL</th>
+          <th colspan="${activeFees.length + 1}" class="bg-pink-500 text-white border-b-2 border-r-2 border-pink-300 py-2.5 px-2">BIAYA ADMIN SHOPEE</th>
+          <th colspan="3" class="bg-emerald-500 text-black border-b-2 border-emerald-300 py-2.5 px-2">PENCAIRAN BERSIH</th>
+          <th class="bg-slate-900 text-white border-b-2 border-slate-700 py-2.5 px-2">AKSI</th>
+        `;
+        thead.appendChild(trCat);
+
+        // Subheader Kolom
+        const trSub = document.createElement('tr');
+        trSub.className = 'text-[10px] font-black uppercase bg-slate-900 text-white border-b-2 border-cyan-400 text-center sticky top-0 z-30';
+        let subHtml = '';
+        p.hppCols.forEach((c, idx) => {
+          subHtml += `<th class="py-2.5 px-2 border-r border-slate-700 ${idx === 0 ? 'sticky-col-1 text-slate-900' : 'text-cyan-300'}">${c.name}</th>`;
+        });
+        subHtml += `<th class="py-2.5 px-2 border-r border-slate-700 text-yellow-300">TOTAL HPP</th><th class="py-2.5 px-2 border-r border-slate-700 text-yellow-300">MARGIN %</th>`;
+        subHtml += `<th class="py-2.5 px-2 border-r border-slate-700 text-purple-300">LISTING PRICE</th><th class="py-2.5 px-2 border-r border-slate-700 text-purple-300">DISC %</th><th class="py-2.5 px-2 border-r border-slate-700 text-purple-300">FINAL PRICE</th>`;
+        activeFees.forEach(f => { subHtml += `<th class="py-2.5 px-2 border-r border-slate-700 text-pink-300">${f.name}</th>`; });
+        subHtml += `<th class="py-2.5 px-2 border-r border-slate-700 text-pink-300">SUB. ADMIN</th><th class="py-2.5 px-2 border-r border-slate-700 text-emerald-300">PENCAIRAN</th><th class="py-2.5 px-2 border-r border-slate-700 text-emerald-300">PROFIT</th><th class="py-2.5 px-2 border-r border-slate-700 text-emerald-300">MARGIN %</th><th class="py-2.5 px-2 w-10"></th>`;
+        trSub.innerHTML = subHtml;
+        thead.appendChild(trSub);
+
+        // Baris Data
+        const filteredRows = p.rows.filter(r => Object.values(r).join(' ').toLowerCase().includes(searchKeyword));
+        filteredRows.forEach(r => {
+          const analysis = getRowAnalysis(p, r);
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-cyan-100/60 transition text-slate-900 border-b border-slate-200';
+          let rowHtml = '';
+
+          p.hppCols.forEach((c, idx) => {
+            const sticky = idx === 0 ? 'sticky-col-1 font-extrabold' : '';
+            if (c.type === 'text') {
+              rowHtml += `<td class="py-1 px-1.5 border-r border-slate-200 ${sticky}"><input type="text" value="${r[c.id] || ''}" onchange="updateCellVal(${r.id}, '${c.id}', this.value)" class="w-full bg-white border border-slate-300 rounded-lg px-2 py-1 font-bold text-xs outline-none"></td>`;
+            } else {
+              rowHtml += `<td class="py-1 px-1 border-r border-slate-200"><input type="number" value="${r[c.id] || 0}" onchange="updateCellVal(${r.id}, '${c.id}', this.value)" class="w-full bg-white border border-slate-300 text-right rounded-lg px-2 py-1 font-black text-emerald-700 text-xs outline-none font-mono-num"></td>`;
+            }
+          });
+
+          rowHtml += `
+            <td class="py-1.5 px-2 border-r text-right font-black bg-yellow-100/80">${formatNumber(analysis.hppTotal)}</td>
+            <td class="py-1.5 px-1 border-r text-center font-bold bg-yellow-50">${p.targetMarginPct}%</td>
+            <td class="py-1.5 px-2 border-r text-right font-black bg-purple-100/60">${formatNumber(analysis.listingPrice)}</td>
+            <td class="py-1.5 px-1 border-r text-center font-bold bg-purple-50">${p.discPct}%</td>
+            <td class="py-1.5 px-2 border-r text-right font-black bg-purple-200/80">${formatNumber(analysis.finalPrice)}</td>
+          `;
+
+          activeFees.forEach(f => {
+            rowHtml += `<td class="py-1.5 px-2 border-r text-right font-bold bg-pink-50">${formatNumber(analysis.feeBreakdownMap[f.id])}</td>`;
+          });
+
+          rowHtml += `
+            <td class="py-1.5 px-2 border-r text-right font-black bg-pink-100">${formatNumber(analysis.subtotalAdmin)}</td>
+            <td class="py-1.5 px-2 border-r text-right font-black bg-emerald-100">${formatNumber(analysis.pencairan)}</td>
+            <td class="py-1.5 px-2 border-r text-right font-black bg-emerald-200/80">${formatNumber(analysis.nettProfit)}</td>
+            <td class="py-1.5 px-2 border-r text-center font-black bg-emerald-300/80">${analysis.nettMargin.toFixed(1)}%</td>
+            <td class="py-1 px-1 text-center"><button onclick="deleteRow(${r.id})" class="p-1 rounded bg-rose-100 text-rose-600"><i data-lucide="trash" class="w-3.5 h-3.5"></i></button></td>
+          `;
+          tr.innerHTML = rowHtml;
+          tbody.appendChild(tr);
+        });
+
+        document.getElementById('totalRowsCount').innerText = filteredRows.length;
+        if (window.lucide) lucide.createIcons();
+      }
+
+      function updateCellVal(rowId, colId, val) {
+        const p = getActiveProduct();
+        const r = p.rows.find(row => row.id == rowId);
+        if (r) {
+          r[colId] = isNaN(val) ? val : parseFloat(val) || 0;
+          saveState();
+          renderTable();
+        }
+      }
+
+      function addNewRow() {
+        const p = getActiveProduct();
+        let newRow = { id: Date.now() };
+        p.hppCols.forEach(c => { newRow[c.id] = c.type === 'text' ? 'Varian Baru' : 50000; });
+        p.rows.push(newRow);
+        saveState();
+        renderTable();
+      }
+
+      function deleteRow(id) {
+        const p = getActiveProduct();
+        p.rows = p.rows.filter(r => r.id != id);
+        saveState();
+        renderTable();
+      }
+
+      function addTableColumn() {
+        const p = getActiveProduct();
+        const newCol = { id: 'c_' + Date.now(), name: `Komponen ${p.hppCols.length + 1}`, type: 'currency' };
+        p.hppCols.push(newCol);
+        p.rows.forEach(r => { r[newCol.id] = 0; });
+        saveState();
+        renderApp();
+      }
+
+      function openNewProductModal() { openModal('newProductModal'); }
+
+      function createNewProduct() {
+        const name = document.getElementById('newProductName').value.trim() || 'PRODUK BARU';
+        const newId = 'prod_' + Date.now();
+        appData.products.push({
+          id: newId,
+          name: name.toUpperCase(),
+          discPct: 25,
+          targetMarginPct: 20,
+          shopeeFees: JSON.parse(JSON.stringify(appData.products[0].shopeeFees)),
+          hppCols: [
+            { id: 'c_variant', name: 'Spesifikasi Varian', type: 'text' },
+            { id: 'c_modal', name: 'Modal Utama (Rp)', type: 'currency' }
+          ],
+          rows: [{ id: Date.now(), c_variant: 'Varian 1', c_modal: 100000 }]
+        });
+        appData.activeProductId = newId;
+        saveState();
+        closeModal('newProductModal');
+        renderApp();
+      }
+
+      function renameCurrentProduct() {
+        const p = getActiveProduct();
+        const name = prompt('Ubah nama produk:', p.name);
+        if (name) { p.name = name.toUpperCase(); saveState(); renderApp(); }
+      }
+
+      function deleteCurrentProduct() {
+        if (appData.products.length <= 1) { alert('Minimal harus ada 1 produk.'); return; }
+        const p = getActiveProduct();
+        if (confirm(`Hapus produk ${p.name}?`)) {
+          appData.products = appData.products.filter(pr => pr.id !== p.id);
+          appData.activeProductId = appData.products[0].id;
+          saveState();
+          renderApp();
+        }
+      }
+
+      function exportToCSV() {
+        const p = getActiveProduct();
+        let csv = 'data:text/csv;charset=utf-8,';
+        let headers = p.hppCols.map(c => c.name).concat(['Total HPP', 'Final Price', 'Pencairan', 'Profit']);
+        csv += headers.join(',') + '\n';
+        p.rows.forEach(r => {
+          let an = getRowAnalysis(p, r);
+          let row = p.hppCols.map(c => `"${r[c.id] || ''}"`).concat([an.hppTotal, an.finalPrice, an.pencairan, an.nettProfit]);
+          csv += row.join(',') + '\n';
+        });
+        const link = document.createElement('a');
+        link.href = encodeURI(csv);
+        link.download = `CyberPricing_${p.name}.csv`;
+        link.click();
+      }
+    </script>
+  </body>
+</html>
