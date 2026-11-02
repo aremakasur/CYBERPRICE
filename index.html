@@ -737,18 +737,18 @@
           <div class="flex items-center justify-between mb-2">
             <span class="text-[10px] font-black uppercase text-pink-700">Aksi Data</span>
           </div>
-          <div class="grid grid-cols-1 gap-2">
-            <button onclick="openFeeModal()" class="inline-flex items-center justify-center gap-2 bg-pink-500 text-white rounded-xl px-3 py-2 text-[10px] font-black uppercase tracking-wider hover:bg-pink-400 transition">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full">
+            <button onclick="openFeeModal()" class="inline-flex items-center justify-center gap-2 bg-pink-500 text-white rounded-xl px-3 py-2 text-[10px] font-black uppercase tracking-wider hover:bg-pink-400 transition min-w-0">
               <i data-lucide="settings" class="w-3.5 h-3.5"></i>
-              Fee / Promo
+              <span>Fee / Promo</span>
             </button>
-            <button onclick="document.getElementById('importJsonInput').click()" class="inline-flex items-center justify-center gap-2 bg-slate-800 text-white rounded-xl px-3 py-2 text-[10px] font-black uppercase tracking-wider hover:bg-slate-700 transition">
+            <button onclick="document.getElementById('importJsonInput').click()" class="inline-flex items-center justify-center gap-2 bg-slate-800 text-white rounded-xl px-3 py-2 text-[10px] font-black uppercase tracking-wider hover:bg-slate-700 transition min-w-0">
               <i data-lucide="upload" class="w-3.5 h-3.5"></i>
-              Import JSON
+              <span>Import JSON</span>
             </button>
-            <button onclick="exportToJson()" class="inline-flex items-center justify-center gap-2 bg-emerald-500 text-slate-900 rounded-xl px-3 py-2 text-[10px] font-black uppercase tracking-wider hover:bg-emerald-400 transition">
+            <button onclick="exportToJson()" class="inline-flex items-center justify-center gap-2 bg-emerald-500 text-slate-900 rounded-xl px-3 py-2 text-[10px] font-black uppercase tracking-wider hover:bg-emerald-400 transition min-w-0">
               <i data-lucide="download" class="w-3.5 h-3.5"></i>
-              Export JSON
+              <span>Export JSON</span>
             </button>
           </div>
         `;
