@@ -160,7 +160,7 @@
 
             <div>
               <div class="flex items-center gap-2 mb-1">
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-widest uppercase bg-slate-900 text-cyan-300 shadow-sm border border-cyan-400/40">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-widest uppercase bg-slate-900 text-cyan-300 shadow-sm border border-cyan-400/50">
                   <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
                   NEON HOLO V3.9
                 </span>
@@ -169,12 +169,12 @@
 
               <h1 class="text-2xl md:text-3xl font-black tracking-tight text-slate-900 flex flex-wrap items-center gap-2">
                 <span id="appHeaderTitle" class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-600 drop-shadow-sm">CYBER PRICING</span>
-                <span id="appHeaderBadge" class="text-xs font-black px-2.5 py-0.5 rounded-xl bg-gradient-to-r from-cyan-400 via-pink-500 to-yellow-400 text-slate-900 shadow-glowCyan uppercase tracking-widest border border-white">NEON HOLO</span>
+                <span id="appHeaderBadge" class="text-xs font-black px-2.5 py-0.5 rounded-xl bg-gradient-to-r from-cyan-400 via-pink-500 to-yellow-400 text-slate-900 shadow-glowCyan uppercase tracking-[0.2em]">NEON HOLO</span>
               </h1>
             </div>
 
             <div class="flex items-center gap-1.5 ml-0 lg:ml-2 pl-3 border-l-2 border-slate-200/80">
-              <button onclick="editHeaderTitle()" title="Ubah Nama & Subtitle Header" class="inline-flex items-center gap-1.5 bg-cyan-50 hover:bg-cyan-100 text-cyan-800 border border-cyan-300 px-3 py-1.5 rounded-xl text-[11px] font-black transition-all hover:scale-105 shadow-sm">
+              <button onclick="editHeaderTitle()" title="Ubah Nama & Subtitle Header" class="inline-flex items-center gap-1.5 bg-cyan-50 hover:bg-cyan-100 text-cyan-800 border border-cyan-300 px-3 py-2 rounded-2xl font-black text-[10px] uppercase tracking-wider transition">
                 <i data-lucide="pencil" class="w-3.5 h-3.5 text-cyan-600"></i>
                 <span>Ubah Title</span>
               </button>
@@ -184,38 +184,43 @@
           <!-- Futuristic Action Control Buttons (Termasuk File Server & Copy Produk) -->
           <div class="flex flex-wrap items-center gap-2 justify-start lg:justify-end">
             <!-- Tombol Buka File dari Server/Lokal -->
-            <button onclick="openFileFromServer()" class="inline-flex items-center gap-1.5 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 px-3 py-2.5 rounded-2xl font-black text-xs shadow-sm transition-all" title="Buka file HTML langsung dari server/direktori">
+            <button onclick="openFileFromServer()" class="inline-flex items-center gap-1.5 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 px-3 py-2.5 rounded-2xl font-black text-[10px] uppercase tracking-wider transition">
               <i data-lucide="folder-open" class="w-4 h-4 text-sky-600"></i>
               <span>BUKA FILE</span>
             </button>
             <!-- Tombol Simpan Update Langsung ke Server/File Asli -->
-            <button onclick="saveFileToServer()" class="inline-flex items-center gap-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 px-3 py-2.5 rounded-2xl font-black text-xs shadow-sm transition-all" title="Simpan update langsung ke file server">
+            <button onclick="saveFileToServer()" class="inline-flex items-center gap-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-300 px-3 py-2.5 rounded-2xl font-black text-[10px] uppercase tracking-wider transition">
               <i data-lucide="hard-drive-download" class="w-4 h-4 text-indigo-600"></i>
               <span>SAVE KE FILE</span>
             </button>
 
-            <button onclick="openNewProductModal()" class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 hover:from-cyan-300 hover:to-purple-500 text-black font-black px-4 py-2.5 rounded-2xl text-xs shadow-glowCyan transition-all hover:scale-105">
+            <button onclick="openFeeModal()" class="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 via-rose-500 to-orange-500 hover:from-pink-400 hover:to-orange-400 text-white font-black px-4 py-2.5 rounded-2xl text-[10px] shadow-glowMagenta transition">
+              <i data-lucide="settings" class="w-4 h-4 stroke-[3]"></i>
+              <span>FEE / PROMO</span>
+            </button>
+
+            <button onclick="openNewProductModal()" class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 hover:from-cyan-300 hover:to-purple-500 text-black font-black px-4 py-2.5 rounded-2xl text-[10px] shadow-glowCyan transition">
               <i data-lucide="plus-circle" class="w-4 h-4 stroke-[3]"></i>
               <span>PRODUK BARU</span>
             </button>
             <!-- Tombol Copy Produk / Duplikat Varian -->
-            <button onclick="duplicateCurrentProduct()" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-black font-black px-3.5 py-2.5 rounded-2xl text-xs shadow-glowYellow transition-all hover:scale-105" title="Duplikat produk aktif beserta seluruh isinya">
+            <button onclick="duplicateCurrentProduct()" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-black font-black px-4 py-2.5 rounded-2xl text-[10px] shadow-glowYellow transition">
               <i data-lucide="copy" class="w-4 h-4 stroke-[3]"></i>
               <span>COPY PRODUK</span>
             </button>
-            <button onclick="renameCurrentProduct()" class="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 px-3 py-2.5 rounded-2xl font-black text-xs shadow-sm transition">
+            <button onclick="renameCurrentProduct()" class="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-200 px-3 py-2.5 rounded-2xl font-black text-[10px] uppercase tracking-wider transition">
               <i data-lucide="edit-3" class="w-4 h-4 text-cyan-600"></i>
               <span>RENAME</span>
             </button>
-            <button onclick="deleteCurrentProduct()" class="inline-flex items-center gap-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border-2 border-rose-200 px-3 py-2.5 rounded-2xl font-black text-xs shadow-sm transition">
+            <button onclick="deleteCurrentProduct()" class="inline-flex items-center gap-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border-2 border-rose-200 px-3 py-2.5 rounded-2xl font-black text-[10px] uppercase tracking-wider transition">
               <i data-lucide="trash-2" class="w-4 h-4 text-rose-600"></i>
               <span>HAPUS</span>
             </button>
-            <button onclick="saveDataManually()" class="inline-flex items-center gap-2 bg-emerald-400 hover:bg-emerald-300 text-black font-black px-4 py-2.5 rounded-2xl text-xs shadow-glowGreen transition hover:scale-105">
+            <button onclick="saveDataManually()" class="inline-flex items-center gap-2 bg-emerald-400 hover:bg-emerald-300 text-black font-black px-4 py-2.5 rounded-2xl text-[10px] shadow-glowGreen transition">
               <i data-lucide="save" class="w-4 h-4 stroke-[3]"></i>
               <span>SIMPAN</span>
             </button>
-            <button onclick="exportToCSV()" class="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-black px-4 py-2.5 rounded-2xl text-xs shadow-glowMagenta transition hover:scale-105">
+            <button onclick="exportToCSV()" class="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-black px-4 py-2.5 rounded-2xl text-[10px] shadow-glowMagenta transition">
               <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
               <span>EXPORT CSV</span>
             </button>
@@ -228,7 +233,7 @@
         <div id="productTabsContainer" class="flex flex-wrap items-center gap-2"></div>
         <div class="flex items-center gap-2 holo-card rounded-2xl px-3.5 py-2 border-2 border-cyan-400/50 shadow-glowCyan">
           <i data-lucide="search" class="w-4 h-4 text-cyan-600"></i>
-          <input id="searchInput" type="text" onkeyup="renderTable()" placeholder="Cari variasi / spesifikasi..." class="w-full xl:w-72 bg-transparent text-xs font-black text-slate-900 placeholder-slate-400 outline-none" />
+          <input id="searchInput" type="text" onkeyup="renderTable()" placeholder="Cari variasi / spesifikasi..." class="w-full xl:w-72 bg-transparent text-xs font-black text-slate-900 placeholder:text-slate-500 outline-none" />
         </div>
       </div>
 
@@ -265,11 +270,15 @@
             <span>KONTROL BARIS & KOLOM MODAL</span>
           </div>
           <div class="flex flex-wrap gap-2.5">
-            <button onclick="addTableColumn()" class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black px-4 py-2 rounded-xl font-black text-xs shadow-glowYellow transition hover:scale-105">
+            <button onclick="openColumnModal()" class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black px-4 py-2 rounded-xl font-black text-xs shadow-glowYellow transition hover:scale-[1.02]">
+              <i data-lucide="columns-3" class="w-4 h-4 stroke-[3]"></i>
+              <span>ATUR KOLOM MODAL</span>
+            </button>
+            <button onclick="addTableColumn()" class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black px-4 py-2 rounded-xl font-black text-xs shadow-glowYellow transition hover:scale-[1.02]">
               <i data-lucide="plus" class="w-4 h-4 stroke-[3]"></i>
               <span>TAMBAH KOLOM MODAL</span>
             </button>
-            <button onclick="addNewRow()" class="inline-flex items-center gap-2 bg-cyan-400 hover:bg-cyan-300 text-black px-4 py-2 rounded-xl font-black text-xs shadow-glowCyan transition hover:scale-105">
+            <button onclick="addNewRow()" class="inline-flex items-center gap-2 bg-cyan-400 hover:bg-cyan-300 text-black px-4 py-2 rounded-xl font-black text-xs shadow-glowCyan transition hover:scale-[1.02]">
               <i data-lucide="rows-3" class="w-4 h-4 stroke-[3]"></i>
               <span>TAMBAH BARIS</span>
             </button>
@@ -280,7 +289,7 @@
 
     <!-- MODAL BIAYA SHOPEE -->
     <div id="feeModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-4">
-      <div class="holo-card-dark w-full max-w-3xl rounded-3xl border-2 border-pink-500 shadow-glowMagenta overflow-hidden">
+      <div class="holo-card-dark w-full max-w-4xl rounded-3xl border-2 border-pink-500 shadow-glowMagenta overflow-hidden">
         <div class="flex items-center justify-between px-6 py-4 border-b border-pink-500/30 bg-pink-950/40">
           <div class="flex items-center gap-3">
             <div class="p-2.5 rounded-2xl bg-pink-500 text-white shadow-glowMagenta">
@@ -296,7 +305,7 @@
           </button>
         </div>
         <div class="p-6">
-          <div class="mb-4 flex justify-between items-center">
+          <div class="mb-4 flex justify-between items-center gap-3 flex-wrap">
             <p class="text-xs text-slate-300 font-medium">Atur potongan persentase, nominal flat per order, serta cap maksimal biaya.</p>
             <button onclick="addNewFeeRule()" class="inline-flex items-center gap-2 bg-pink-500 hover:bg-pink-400 text-white px-3.5 py-2 rounded-xl font-black text-xs shadow-glowMagenta transition">
               <i data-lucide="plus" class="w-4 h-4 stroke-[3]"></i>
@@ -307,7 +316,41 @@
         </div>
         <div class="flex justify-end gap-3 border-t border-slate-800 px-6 py-4 bg-slate-950/90">
           <button onclick="closeModal('feeModal')" class="px-4 py-2 rounded-xl border border-slate-700 bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700 transition">BATAL</button>
-          <button onclick="saveFeeRulesAndClose()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-black text-xs hover:from-pink-400 hover:to-purple-500 transition shadow-glowMagenta">SIMPAN ATURAN</button>
+          <button onclick="saveFeeRulesAndClose()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-black text-xs hover:from-pink-400 hover:to-purple-500 transition">SIMPAN & TUTUP</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL KOLOM MODAL -->
+    <div id="columnModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-4">
+      <div class="holo-card-dark w-full max-w-4xl rounded-3xl border-2 border-yellow-400 shadow-glowYellow overflow-hidden">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-yellow-400/30 bg-yellow-950/40">
+          <div class="flex items-center gap-3">
+            <div class="p-2.5 rounded-2xl bg-yellow-400 text-black shadow-glowYellow">
+              <i data-lucide="columns-3" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-[10px] uppercase tracking-widest text-yellow-300 font-black">KOLOM MODAL</p>
+              <h2 class="text-lg font-black text-white">Atur Kolom Harga Modal</h2>
+            </div>
+          </div>
+          <button onclick="closeModal('columnModal')" class="text-slate-400 hover:text-white transition">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+        <div class="p-6">
+          <div class="mb-4 flex justify-between items-center gap-3 flex-wrap">
+            <p class="text-xs text-slate-300 font-medium">Ubah nama kolom, tipe data, atau tambah kolom baru untuk biaya modal.</p>
+            <button onclick="addNewColumnRule()" class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black px-3.5 py-2 rounded-xl font-black text-xs shadow-glowYellow transition">
+              <i data-lucide="plus" class="w-4 h-4 stroke-[3]"></i>
+              Tambah Kolom
+            </button>
+          </div>
+          <div id="hppColumnListModal" class="space-y-3 max-h-[50vh] overflow-y-auto pr-1"></div>
+        </div>
+        <div class="flex justify-end gap-3 border-t border-slate-800 px-6 py-4 bg-slate-950/90">
+          <button onclick="closeModal('columnModal')" class="px-4 py-2 rounded-xl border border-slate-700 bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700 transition">BATAL</button>
+          <button onclick="saveColumnConfigAndClose()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-black text-xs hover:from-yellow-300 hover:to-orange-300 transition">SIMPAN & TUTUP</button>
         </div>
       </div>
     </div>
@@ -332,7 +375,7 @@
         <div class="p-6 space-y-4">
           <div>
             <label class="block text-[10px] uppercase tracking-widest text-purple-300 font-black mb-1.5">Nama Produk / Kategori</label>
-            <input id="newProductName" type="text" class="w-full bg-slate-900 border-2 border-purple-500/50 focus:border-cyan-400 rounded-xl px-4 py-2.5 text-xs font-bold text-white outline-none" placeholder="Contoh: LEMARI BESI SLIDING" />
+            <input id="newProductName" type="text" class="w-full bg-slate-900 border-2 border-purple-500/50 focus:border-cyan-400 rounded-xl px-4 py-2.5 text-xs font-bold text-white outline-none" placeholder="Contoh: KASUR SINGLE" />
           </div>
           <div>
             <label class="block text-[10px] uppercase tracking-widest text-purple-300 font-black mb-1.5">Template Struktur Modal</label>
@@ -346,7 +389,7 @@
         </div>
         <div class="flex justify-end gap-3 border-t border-slate-800 px-6 py-4 bg-slate-950/90">
           <button onclick="closeModal('newProductModal')" class="px-4 py-2 rounded-xl border border-slate-700 bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700 transition">BATAL</button>
-          <button onclick="createNewProduct()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-black font-black text-xs hover:from-cyan-300 hover:to-purple-500 transition shadow-glowCyan">BUAT PRODUK</button>
+          <button onclick="createNewProduct()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 text-black font-black text-xs hover:from-cyan-300 hover:to-purple-500 transition">BUAT PRODUK</button>
         </div>
       </div>
     </div>
@@ -631,7 +674,7 @@
                   <span class="text-[10px] font-black uppercase text-pink-700 truncate">${fee.name}</span>
                 </div>
                 <div class="flex items-center gap-1">
-                  <input type="number" value="${fee.value}" step="0.1" onchange="updateFeeVal('${fee.id}', this.value)" class="w-full bg-white border-2 border-pink-300 rounded-xl px-2 py-1 text-xs font-black text-pink-900 text-center outline-none font-mono-num">
+                  <input type="number" value="${fee.value}" step="0.1" onchange="updateFeeVal('${fee.id}', this.value)" class="w-full bg-white border-2 border-pink-300 rounded-xl px-2 py-1 text-xs font-black text-slate-900 outline-none font-mono-num">
                   <span class="text-xs font-black text-pink-700">${fee.type === 'percent' ? '%' : 'Rp'}</span>
                 </div>
               `;
@@ -639,6 +682,19 @@
             }
           });
         }
+
+        const settingsCard = document.createElement('div');
+        settingsCard.className = 'holo-card rounded-2xl p-2.5 border-2 border-pink-400 bg-pink-500/10 flex flex-col justify-between shadow-glowMagenta';
+        settingsCard.innerHTML = `
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-black uppercase text-pink-700">Pengaturan</span>
+          </div>
+          <button onclick="openFeeModal()" class="inline-flex items-center justify-center gap-2 bg-pink-500 text-white rounded-xl px-3 py-2 text-[10px] font-black uppercase tracking-wider hover:bg-pink-400 transition">
+            <i data-lucide="settings" class="w-3.5 h-3.5"></i>
+            Ubah Fee / Promo
+          </button>
+        `;
+        grid.appendChild(settingsCard);
       }
 
       function createParamCard(label, type, val, onChangeFn, borderBgStyle) {
@@ -660,6 +716,232 @@
           saveState();
           renderTable();
         }
+      }
+
+      function openFeeModal() {
+        renderFeeModal();
+        openModal('feeModal');
+      }
+
+      function renderFeeModal() {
+        const p = getActiveProduct();
+        const list = document.getElementById('shopeeFeeListModal');
+        if (!list || !p) return;
+        list.innerHTML = '';
+
+        if (!Array.isArray(p.shopeeFees) || p.shopeeFees.length === 0) {
+          list.innerHTML = '<div class="rounded-2xl border border-dashed border-pink-400/60 p-4 text-sm text-slate-300">Belum ada aturan biaya.</div>';
+          return;
+        }
+
+        p.shopeeFees.forEach((fee) => {
+          const row = document.createElement('div');
+          row.className = 'rounded-2xl border border-pink-500/40 bg-slate-900/60 p-3';
+          row.innerHTML = `
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
+              <div class="md:col-span-1 flex items-center justify-center">
+                <input type="checkbox" ${fee.active ? 'checked' : ''} onchange="updateFeeField('${fee.id}', 'active', this.checked)" class="h-4 w-4 accent-pink-500 rounded" />
+              </div>
+              <div class="md:col-span-3">
+                <label class="block text-[10px] uppercase tracking-widest text-pink-300 font-black mb-1.5">Nama</label>
+                <input type="text" value="${(fee.name || '').replace(/"/g, '&quot;')}" onchange="updateFeeField('${fee.id}', 'name', this.value)" class="w-full bg-slate-950 border-2 border-pink-500/50 rounded-xl px-3 py-2 text-xs font-bold text-white outline-none" />
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-[10px] uppercase tracking-widest text-pink-300 font-black mb-1.5">Tipe</label>
+                <select onchange="updateFeeField('${fee.id}', 'type', this.value)" class="w-full bg-slate-950 border-2 border-pink-500/50 rounded-xl px-3 py-2 text-xs font-bold text-white outline-none">
+                  <option value="percent" ${fee.type === 'percent' ? 'selected' : ''}>Persen</option>
+                  <option value="flat" ${fee.type === 'flat' ? 'selected' : ''}>Flat</option>
+                </select>
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-[10px] uppercase tracking-widest text-pink-300 font-black mb-1.5">Nilai</label>
+                <input type="number" value="${fee.value || 0}" step="0.1" oninput="updateFeeField('${fee.id}', 'value', this.value)" class="w-full bg-slate-950 border-2 border-pink-500/50 rounded-xl px-3 py-2 text-xs font-bold text-white outline-none" />
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-[10px] uppercase tracking-widest text-pink-300 font-black mb-1.5">Cap</label>
+                <input type="number" value="${fee.cap || 0}" step="1000" oninput="updateFeeField('${fee.id}', 'cap', this.value)" class="w-full bg-slate-950 border-2 border-pink-500/50 rounded-xl px-3 py-2 text-xs font-bold text-white outline-none" />
+              </div>
+              <div class="md:col-span-2 flex items-end justify-end">
+                <button onclick="deleteFeeRule('${fee.id}')" class="inline-flex items-center justify-center gap-2 bg-rose-500 hover:bg-rose-400 text-white rounded-xl px-3 py-2 text-[10px] font-black uppercase tracking-wider transition">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                  Hapus
+                </button>
+              </div>
+            </div>
+          `;
+          list.appendChild(row);
+        });
+
+        if (window.lucide && lucide.createIcons) lucide.createIcons();
+      }
+
+      function updateFeeField(feeId, field, value) {
+        const p = getActiveProduct();
+        if (!p || !Array.isArray(p.shopeeFees)) return;
+
+        const fee = p.shopeeFees.find(item => item.id === feeId);
+        if (!fee) return;
+
+        if (field === 'active') fee.active = Boolean(value);
+        else if (field === 'name') fee.name = String(value).trim() || 'Biaya Baru';
+        else if (field === 'type') fee.type = value === 'flat' ? 'flat' : 'percent';
+        else if (field === 'value') fee.value = parseFloat(value) || 0;
+        else if (field === 'cap') fee.cap = parseFloat(value) || 0;
+
+        saveState();
+        renderGlobalParams();
+        renderFeeModal();
+        renderTable();
+      }
+
+      function addNewFeeRule() {
+        const p = getActiveProduct();
+        if (!p) return;
+        p.shopeeFees.push({
+          id: 'fee_' + Date.now(),
+          name: 'Biaya Baru',
+          type: 'percent',
+          value: 0,
+          cap: 0,
+          active: true
+        });
+        saveState();
+        renderGlobalParams();
+        renderFeeModal();
+        renderTable();
+      }
+
+      function deleteFeeRule(feeId) {
+        const p = getActiveProduct();
+        if (!p || !Array.isArray(p.shopeeFees)) return;
+        if (p.shopeeFees.length <= 1) {
+          alert('Minimal harus ada 1 aturan biaya aktif.');
+          return;
+        }
+
+        p.shopeeFees = p.shopeeFees.filter(f => f.id !== feeId);
+        saveState();
+        renderGlobalParams();
+        renderFeeModal();
+        renderTable();
+      }
+
+      function saveFeeRulesAndClose() {
+        saveState();
+        closeModal('feeModal');
+      }
+
+      function openColumnModal() {
+        renderColumnModal();
+        openModal('columnModal');
+      }
+
+      function renderColumnModal() {
+        const p = getActiveProduct();
+        const list = document.getElementById('hppColumnListModal');
+        if (!list || !p) return;
+        list.innerHTML = '';
+
+        if (!Array.isArray(p.hppCols) || p.hppCols.length === 0) {
+          list.innerHTML = '<div class="rounded-2xl border border-dashed border-yellow-400/60 p-4 text-sm text-slate-300">Belum ada kolom modal.</div>';
+          return;
+        }
+
+        p.hppCols.forEach((col) => {
+          const row = document.createElement('div');
+          row.className = 'rounded-2xl border border-yellow-400/40 bg-slate-900/60 p-3';
+          row.innerHTML = `
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
+              <div class="md:col-span-5">
+                <label class="block text-[10px] uppercase tracking-widest text-yellow-300 font-black mb-1.5">Nama Kolom</label>
+                <input type="text" value="${(col.name || '').replace(/"/g, '&quot;')}" onchange="updateColumnField('${col.id}', 'name', this.value)" class="w-full bg-slate-950 border-2 border-yellow-400/50 rounded-xl px-3 py-2 text-xs font-bold text-white outline-none" />
+              </div>
+              <div class="md:col-span-3">
+                <label class="block text-[10px] uppercase tracking-widest text-yellow-300 font-black mb-1.5">Tipe</label>
+                <select onchange="updateColumnField('${col.id}', 'type', this.value)" class="w-full bg-slate-950 border-2 border-yellow-400/50 rounded-xl px-3 py-2 text-xs font-bold text-white outline-none">
+                  <option value="currency" ${col.type === 'currency' ? 'selected' : ''}>Currency</option>
+                  <option value="text" ${col.type === 'text' ? 'selected' : ''}>Text</option>
+                </select>
+              </div>
+              <div class="md:col-span-2">
+                <label class="block text-[10px] uppercase tracking-widest text-yellow-300 font-black mb-1.5">Type ID</label>
+                <div class="w-full bg-slate-950 border-2 border-yellow-400/50 rounded-xl px-3 py-2 text-[10px] font-black text-yellow-200 uppercase">${col.id}</div>
+              </div>
+              <div class="md:col-span-2 flex items-end justify-end">
+                <button onclick="deleteColumnRule('${col.id}')" class="inline-flex items-center justify-center gap-2 bg-rose-500 hover:bg-rose-400 text-white rounded-xl px-3 py-2 text-[10px] font-black uppercase tracking-wider transition">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                  Hapus
+                </button>
+              </div>
+            </div>
+          `;
+          list.appendChild(row);
+        });
+
+        if (window.lucide && lucide.createIcons) lucide.createIcons();
+      }
+
+      function updateColumnField(colId, field, value) {
+        const p = getActiveProduct();
+        if (!p || !Array.isArray(p.hppCols)) return;
+
+        const col = p.hppCols.find(item => item.id === colId);
+        if (!col) return;
+
+        if (field === 'name') {
+          col.name = String(value).trim() || 'Kolom Baru';
+        }
+        if (field === 'type') {
+          col.type = value === 'text' ? 'text' : 'currency';
+        }
+
+        saveState();
+        renderTable();
+        renderColumnModal();
+      }
+
+      function addNewColumnRule() {
+        const p = getActiveProduct();
+        if (!p) return;
+
+        const newCol = { id: 'c_' + Date.now(), name: `Komponen ${p.hppCols.length + 1}`, type: 'currency' };
+        p.hppCols.push(newCol);
+        p.rows.forEach(row => {
+          row[newCol.id] = 0;
+        });
+
+        saveState();
+        renderApp();
+        renderColumnModal();
+      }
+
+      function deleteColumnRule(colId) {
+        const p = getActiveProduct();
+        if (!p || !Array.isArray(p.hppCols)) return;
+        if (p.hppCols.length <= 1) {
+          alert('Minimal harus ada 1 kolom modal.');
+          return;
+        }
+
+        const target = p.hppCols.find(item => item.id === colId);
+        if (target && target.type === 'text' && p.hppCols.filter(item => item.type === 'text').length <= 1) {
+          alert('Minimal harus ada 1 kolom tipe teks untuk varian / spesifikasi.');
+          return;
+        }
+
+        p.hppCols = p.hppCols.filter(item => item.id !== colId);
+        p.rows.forEach(row => {
+          delete row[colId];
+        });
+
+        saveState();
+        renderApp();
+        renderColumnModal();
+      }
+
+      function saveColumnConfigAndClose() {
+        saveState();
+        closeModal('columnModal');
       }
 
       function calculateRowPrices(hpp, targetMarginPct, discPct, shopeeFees) {
@@ -743,7 +1025,7 @@
         subHtml += `<th class="py-2.5 px-2 border-r border-slate-700 text-yellow-300">TOTAL HPP</th><th class="py-2.5 px-2 border-r border-slate-700 text-yellow-300">MARGIN %</th>`;
         subHtml += `<th class="py-2.5 px-2 border-r border-slate-700 text-purple-300">LISTING PRICE</th><th class="py-2.5 px-2 border-r border-slate-700 text-purple-300">DISC %</th><th class="py-2.5 px-2 border-r border-slate-700 text-purple-300">FINAL PRICE</th>`;
         activeFees.forEach(f => { subHtml += `<th class="py-2.5 px-2 border-r border-slate-700 text-pink-300">${f.name}</th>`; });
-        subHtml += `<th class="py-2.5 px-2 border-r border-slate-700 text-pink-300">SUB. ADMIN</th><th class="py-2.5 px-2 border-r border-slate-700 text-emerald-300">PENCAIRAN</th><th class="py-2.5 px-2 border-r border-slate-700 text-emerald-300">PROFIT</th><th class="py-2.5 px-2 border-r border-slate-700 text-emerald-300">MARGIN %</th><th class="py-2.5 px-2 w-10"></th>`;
+        subHtml += `<th class="py-2.5 px-2 border-r border-slate-700 text-pink-300">SUB. ADMIN</th><th class="py-2.5 px-2 border-r border-slate-700 text-emerald-300">PENCAIRAN</th><th class="py-2.5 px-2 border-r border-slate-700 text-emerald-300">PROFIT</th><th class="py-2.5 px-2 border-r border-slate-700 text-emerald-300">NET MARGIN</th><th class="py-2.5 px-2 text-white">AKSI</th>`;
         trSub.innerHTML = subHtml;
         thead.appendChild(trSub);
 
@@ -758,9 +1040,9 @@
           p.hppCols.forEach((c, idx) => {
             const sticky = idx === 0 ? 'sticky-col-1 font-extrabold' : '';
             if (c.type === 'text') {
-              rowHtml += `<td class="py-1 px-1.5 border-r border-slate-200 ${sticky}"><input type="text" value="${r[c.id] || ''}" onchange="updateCellVal(${r.id}, '${c.id}', this.value)" class="w-full bg-white border border-slate-300 rounded-lg px-2 py-1 font-bold text-xs outline-none"></td>`;
+              rowHtml += `<td class="py-1 px-1.5 border-r border-slate-200 ${sticky}"><input type="text" value="${r[c.id] || ''}" onchange="updateCellVal(${r.id}, '${c.id}', this.value)" class="w-full bg-transparent border border-slate-200 rounded-md px-1.5 py-1 text-[10px] font-bold text-slate-900 outline-none" /></td>`;
             } else {
-              rowHtml += `<td class="py-1 px-1 border-r border-slate-200"><input type="number" value="${r[c.id] || 0}" onchange="updateCellVal(${r.id}, '${c.id}', this.value)" class="w-full bg-white border border-slate-300 text-right rounded-lg px-2 py-1 font-black text-emerald-700 text-xs outline-none font-mono-num"></td>`;
+              rowHtml += `<td class="py-1 px-1 border-r border-slate-200"><input type="number" value="${r[c.id] || 0}" onchange="updateCellVal(${r.id}, '${c.id}', this.value)" class="w-full bg-transparent border border-slate-200 rounded-md px-1 py-1 text-[10px] font-bold text-slate-900 outline-none font-mono-num" /></td>`;
             }
           });
 
@@ -780,7 +1062,7 @@
             <td class="py-1.5 px-2 border-r text-right font-black bg-pink-100">${formatNumber(analysis.subtotalAdmin)}</td>
             <td class="py-1.5 px-2 border-r text-right font-black bg-emerald-100">${formatNumber(analysis.pencairan)}</td>
             <td class="py-1.5 px-2 border-r text-right font-black bg-emerald-200/80">${formatNumber(analysis.nettProfit)}</td>
-            <td class="py-1.5 px-2 border-r text-center font-black bg-emerald-300/80">${analysis.nettMargin.toFixed(1)}%</td>
+            <td class="py-1.5 px-2 border-r text-right font-black bg-emerald-300/80">${analysis.nettMargin.toFixed(1)}%</td>
             <td class="py-1 px-1 text-center"><button onclick="deleteRow(${r.id})" class="p-1 rounded bg-rose-100 text-rose-600"><i data-lucide="trash" class="w-3.5 h-3.5"></i></button></td>
           `;
           tr.innerHTML = rowHtml;
